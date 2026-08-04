@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {ToastContainer} from 'react-toastify';
+import { heandleError } from '../utils';
 
 function Signup() {
 
@@ -18,9 +19,13 @@ function Signup() {
      copySignupInfo[name] = value;
      setSignupInfo(copySignupInfo);
   }
-  console.log('loginInfo -> ', loginInfo)
+
   const handleSignup = (e) => {
     e.preventDefault();
+    const { name, email, password } = signupInfo;
+    if (!name || !email || !password) {
+      return heandleError('name, email and password are required')
+    }
   }
 
   return (
@@ -37,7 +42,7 @@ function Signup() {
            name='name' 
            autoFocus 
            placeholder='Enter your name...' 
-           value={setSignupInfo.name}
+           value={signupInfo.name}
            />
          </div>
 
@@ -48,7 +53,7 @@ function Signup() {
           type="email" 
           name='email' 
           placeholder='Enter your email...' 
-          value={setSignupInfo.email}
+          value={signupInfo.email}
           />
          </div>
 
@@ -59,7 +64,7 @@ function Signup() {
           type="password" 
           name='password' 
           placeholder='Enter your password...' 
-          value={setSignupInfo.password}
+          value={signupInfo.password}
         />
          </div>
          
