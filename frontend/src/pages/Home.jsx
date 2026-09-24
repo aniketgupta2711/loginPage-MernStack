@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 
 function Home() {
    const [loggedInUser, setLoginInfoUser] = useState('');
+   const [products, setProducts] = useState('');
+
    const navigate = useNavigate();
    useEffect(() => {
     setLoginInfoUser(localStorage.getItem('loggedInUser'))
@@ -22,8 +24,15 @@ function Home() {
    const fetchProducts = async () => {
     try {
       const url = "http://localhost:8000/products"
-      const response = await fectch(url);
-      cons
+      const headers = {
+        headers : {
+          'Authorization': localStorage.getItem('token')
+        }
+      }
+      const response = await fectch(url, headers);
+      const result = await response.json();
+      console.log(result);
+      setProducts(result);
     } catch (err) {
       handleError(err)
     }
@@ -37,7 +46,15 @@ function Home() {
     <div>
       <h1>{loggedInUser}</h1>
       <button onClick={handleLogout}>Logout</button>
-
+      <div>
+        {
+          products && products?.map((item, index) => {
+            <ul key={index}>
+              <span>{item.name} : {itme.price}</span>
+            </ul>
+          })
+        }
+      </div>
       <ToastContainer/>
     </div>
   )
