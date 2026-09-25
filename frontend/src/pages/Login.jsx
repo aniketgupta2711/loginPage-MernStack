@@ -85,7 +85,7 @@ function Login() {
         />
          </div>
          
-         <button type='submit'>Signup</button>
+         <button type='submit'>Login</button>
          <span> Don't have an account ?
           <Link to="/signup">Signup</Link>
          </span>

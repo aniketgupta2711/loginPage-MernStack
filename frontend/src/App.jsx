@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import { useState } from 'react';
+import RefreshHandler from './RefreshHandler';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div className="App">
+      <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
       <Routes>
         <Route path="/" element={<Navigate to ="/login" />} />
         <Route path="/login" element={<Login />} />
